@@ -4,7 +4,11 @@ module Socky
       class Presence < Private
         
         def add_subscriber(connection, message, subscriber_data = nil)
-          self.send_data({ 'event' => 'socky:member:added', 'connection_id' => connection.id, 'channel' => self.name, 'data' => subscriber_data }, connection.id) unless rights(message)['hide']
+          data = {
+            'connection_id' => connection.id,
+            'data' => subscriber_data
+          }
+          self.send_data({ 'event' => 'socky:member:added', 'connection_id' => connection.id, 'channel' => self.name, 'data' => data }, connection.id) unless rights(message)['hide']
           super
         end
       
