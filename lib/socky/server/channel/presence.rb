@@ -26,7 +26,7 @@ module Socky
         def member_list(connection)
           list = []
           self.subscribers.each do |connection_id, member|
-            list << { 'connection_id' => connection_id, 'data' => member['data'] } unless connection_id == connection.id
+            list << { 'connection_id' => connection_id, 'data' => member['data'] } # unless connection_id == connection.id
           end
           list
         end
