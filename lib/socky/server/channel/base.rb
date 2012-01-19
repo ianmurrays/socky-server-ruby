@@ -51,7 +51,7 @@ module Socky
         end
         
         def deliver(connection, message)
-          return unless connection.nil? || (subscribers[connection.id] && subscribers[connection.id]['write'])
+          return unless connection.nil? || (subscribers[connection.id] && (subscribers[connection.id]['write'] || self.class == Socky::Server::Channel::Public))
           send_data('event' => message.event, 'channel' => self.name, 'data' => message.user_data)
         end
         
